@@ -1,11 +1,5 @@
-# ()
-Das Projekt soll die administrativen Aufgaben, welche im Rahmen
-des Projektgeschäfts entstehen, vereinfachen. Ein weiteres Ziel ist
-die Erarbeitungen von Building Blocks, welche den Schwerpunkt
-auf den Qualitätskriterien typischer Software haben.
-
-In einigen Bereichen soll dabei auch der Einsatz neuer Technologien
-unter Einbezug der Qualitätskriterien geprüft werden.
+# ::projektname
+(Projektbeschreibung)
 
 ## Einsatz neuer Technologien
 Beim Einsatz **neuer Technologien**, **Frameworks** und **Libraries** gilt folgender Ablauf:
