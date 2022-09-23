@@ -1,20 +1,39 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+# ()
+Das Projekt soll die administrativen Aufgaben, welche im Rahmen
+des Projektgeschäfts entstehen, vereinfachen. Ein weiteres Ziel ist
+die Erarbeitungen von Building Blocks, welche den Schwerpunkt
+auf den Qualitätskriterien typischer Software haben.
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+In einigen Bereichen soll dabei auch der Einsatz neuer Technologien
+unter Einbezug der Qualitätskriterien geprüft werden.
+
+## Einsatz neuer Technologien
+Beim Einsatz **neuer Technologien**, **Frameworks** und **Libraries** gilt folgender Ablauf:
+1. Erstellen eines kleinen Prototypen
+2. Projektteam den Prototypen vorstellen
+3. Ziele, die mit der neuen Technologie bzw. Framework erreicht werden, unter den Aspekten der Wirtschaftlichkeit, Machbarkeit und Wünschbarkeit bewerten
+4. Vergleich zu bereits eingesetzten Technologien und den Vorteil daraus
+
+# Dokumentation
+Doc as Code im Verzeichnis /docs des Repositories.
+
+Infos zu Konventionen und Vorgehen mit Azure DevOps Wiki https://docs.microsoft.com/de-de/azure/devops/project/wiki/publish-repo-to-wiki?view=azure-devops&tabs=browser#change-the-page-sequence-add-or-update-a-order-file
+
+## Wichtige Azure DevOps Konventionen
+1. In jeden Verzeichnis ein File mit Namen **.order** anlegen
+2. Verzeichnisse müssen auch ein Markdown-File mit gleichen Namen enthalten (siehe Architektur)
+
+# Technologien und Frameworks
+1. Visual Studio 2019
+2. .NET 5
+3. Blazor
+4. Entity Framework
+5. Browserstack
+6. Telerik Reporting
+7. Dokumente mit DocumentProcessing
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+TODO: 
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+TODO: 
