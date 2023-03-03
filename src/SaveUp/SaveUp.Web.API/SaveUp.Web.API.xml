@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SaveUp.Web.API</name>
+    </assembly>
+    <members>
+        <member name="T:SaveUp.Web.API.Migrations.init">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.init.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.init.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:SaveUp.Web.API.Migrations.Entrie">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.Entrie.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.Entrie.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.Entrie.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:SaveUp.Web.API.Migrations.Tenant">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.Tenant.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.Tenant.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.Tenant.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="T:SaveUp.Web.API.Migrations.loginBlock">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.loginBlock.Up(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.loginBlock.Down(Microsoft.EntityFrameworkCore.Migrations.MigrationBuilder)">
+            <inheritdoc />
+        </member>
+        <member name="M:SaveUp.Web.API.Migrations.loginBlock.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

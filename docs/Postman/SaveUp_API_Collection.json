@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "abf707e8-03ee-4b0f-81ba-5c3f15f01c46",
+		"name": "SaveUp Raspberry",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22873797"
+	},
+	"item": [
+		{
+			"name": "Entrie",
+			"item": [
+				{
+					"name": "Get Entries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "muellersimon.internet-box.ch/api/Entrie/All",
+							"host": [
+								"muellersimon",
+								"internet-box",
+								"ch"
+							],
+							"path": [
+								"api",
+								"Entrie",
+								"All"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Entrie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"created\": \"2023-03-01T13:38:32.007Z\",\r\n  \"description\": \"Kaugummi\",\r\n  \"amount\": 1.3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "muellersimon.internet-box.ch/api/Entrie/Create",
+							"host": [
+								"muellersimon",
+								"internet-box",
+								"ch"
+							],
+							"path": [
+								"api",
+								"Entrie",
+								"Create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Entrie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "muellersimon.internet-box.ch/api/Entrie/Delete?id=1",
+							"host": [
+								"muellersimon",
+								"internet-box",
+								"ch"
+							],
+							"path": [
+								"api",
+								"Entrie",
+								"Delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJTaW1vbiIsIm5iZiI6MTY3NzU4NzcwNSwiZXhwIjoxNjc5MzE1NzA1LCJpYXQiOjE2Nzc1ODc3MDV9.nR0TBwemoY6_m8yKf3dg0jTzTOazY6nANFyZhDszhGagbHercZyPuH5nTMpak0GzDxxjPE3wFJZHPYsZIgHfUw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer 0a714cad-11d0-487c-b2f1-5ab3954d071a",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Simon\",\r\n  \"password\": \"Mth5545545\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "muellersimon.internet-box.ch/api/User/CreateUser",
+							"host": [
+								"muellersimon",
+								"internet-box",
+								"ch"
+							],
+							"path": [
+								"api",
+								"User",
+								"CreateUser"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer 0a714cad-11d0-487c-b2f1-5ab3954d071a",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"Simon\",\r\n  \"password\": \"Mth5545545\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "muellersimon.internet-box.ch/api/User/Login",
+							"host": [
+								"muellersimon",
+								"internet-box",
+								"ch"
+							],
+							"path": [
+								"api",
+								"User",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"abcd\",\r\n  \"verifiyPassword\": \"abcd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "muellersimon.internet-box.ch/api/User/ChangePassword",
+							"host": [
+								"muellersimon",
+								"internet-box",
+								"ch"
+							],
+							"path": [
+								"api",
+								"User",
+								"ChangePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
