@@ -1,12 +1,12 @@
-﻿using System.Reflection;
+using System.Reflection;
 using CommandLine;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using SaveUp.MigrateDatabase.CLI.Exceptions;
 using SaveUp.Web.API;
-using SaveUp.Web.API.Exceptions;
 
 namespace SaveUp.MigrateDatabase.CLI;
 

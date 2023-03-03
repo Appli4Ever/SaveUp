@@ -1,4 +1,4 @@
-﻿namespace SaveUp.Web.API.Exceptions
+namespace SaveUp.MigrateDatabase.CLI.Exceptions
 {
     public class DatabaseException : Exception
     {
