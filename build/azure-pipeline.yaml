@@ -1,1 +1,122 @@
-trigger: 
+name: $(Date:yyyy.MM.dd)$(Rev:.r)
+
+trigger:
+- main
+
+pool: databinding self hosted
+
+variables:
+  solution: '**/SaveUp.sln'
+  serverProject: '**/SaveUp.Web.API.csproj'
+  databaseDeploymentProject: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/SaveUp.MigrateDatabase.CLI.csproj'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  artifactName: 'saveUp-app'
+  artifactNameDeployment: 'saveUp-database-deployment'
+  databaseDeployment: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/bin/Release/net7.0'
+  buildOutput: 'bin\Release\net7.0'
+  prTargetFolder: '/var/www/pr.saveup'
+
+stages:
+- stage: saveUp_build
+  jobs:
+  - job:
+    steps:
+    
+    - task: NuGetToolInstaller@1
+      inputs:
+        versionSpec: '6.4.0'
+        checkLatest: true
+        
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'sdk'
+        version: '7.x'
+
+    - task: DotNetCoreCLI@2
+      displayName: Build
+      inputs:
+        projects: '$(solution)'
+        arguments: '--configuration $(BuildConfiguration) /p:Version=$(Build.BuildNumber)'
+        
+    - task: DotNetCoreCLI@2
+      displayName: Test
+      inputs:
+        command: test
+        projects: '$(solution)'
+        arguments: '--configuration $(BuildConfiguration)'
+        
+    - task: CopyFiles@2
+      displayName: 'Copy Files DatabaseDeployment'
+      inputs:
+        SourceFolder: '$(Build.SourcesDirectory)$(databaseDeployment)'
+        TargetFolder: '$(build.artifactstagingdirectory)/$(artifactNameDeployment)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish $(artifactName)'
+      inputs:
+        command: publish
+        publishWebProjects: false
+        projects: '$(serverProject)'
+        arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)/$(artifactName) --no-restore /p:Version=$(Build.BuildNumber)'
+        zipAfterPublish: true
+  
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: $(artifactNameDeployment)'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(artifactNameDeployment)'
+        ArtifactName: '$(artifactNameDeployment)'
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Artifact: $(artifactName)'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/$(artifactName)'
+        ArtifactName: '$(artifactName)'   
+
+- stage: saveUp_prod
+  variables:
+  - group: Test
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  jobs:  
+  - deployment: saveUp_prod
+    displayName: 'Publish SaveUp-Produktion'
+    environment: SaveUp-Produktion
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            artifact: 'saveUp-app'
+            displayName: 'Download SaveUp packages'
+            
+          - download: current
+            artifact: 'saveUp-database-deployment'
+            displayName: 'Download database deployment packages'
+
+          - task: DotNetCoreCLI@2
+            displayName: 'Update database'
+            inputs:
+              command: custom
+              custom: SaveUp.MigrateDatabase.dll
+              arguments: '-c "$(ConnectionString)"'
+              workingDirectory: '$(Agent.BuildDirectory)/saveUp-database-deployment'              
+
+          - task: CopyFilesOverSSH@0
+            displayName: 'Copy Files over SSH'
+            inputs:
+              sshEndpoint: 'SaveUpSSH'
+              sourceFolder: '$(Agent.BuildDirectory)/$(artifactName)'
+              contents: '**'
+              targetFolder: '$(itTargetFolder)'
+              cleanTargetFolder: true
+              readyTimeout: '20000'
+              failOnEmptySource: true
+              
+          - task: SSH@0
+            displayName: 'Unzip and Start Project'
+            inputs:
+              sshEndpoint: 'SaveUpSSH'
+              runOptions: 'commands'
+              commands: 'unzip $(itTargetFolder)/SaveUp.Web.API.zip -d $(itTargetFolder);rm $(itTargetFolder)/SveUp.Web.API.zip;dotnet $(itTargetFolder)/SaveUp.API.Web.dll &'
+              readyTimeout: '20000'        
+                     
