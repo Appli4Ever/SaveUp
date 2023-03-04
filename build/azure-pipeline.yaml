@@ -10,7 +10,7 @@ variables:
   serverProject: '**/SaveUp.Web.API.csproj'
   mauiProject: '**/SaveUp.csproj'
   testProject: '**/SaveUp.Web.API.Tests.csproj'
-  databaseDeploymentProject: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/SaveUp.MigrateDatabase.CLI.csproj'
+  databaseProject: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/SaveUp.MigrateDatabase.CLI.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   artifactName: 'saveUp-app'
