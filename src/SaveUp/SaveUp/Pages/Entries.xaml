@@ -3,11 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaveUp.Pages.Entries"
              Title="Einträge"
-             xmlns:vm="clr-namespace:SaveUp.ViewModels">
+             xmlns:vm="clr-namespace:SaveUp.ViewModels"
+             xmlns:controls="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material">
     <VerticalStackLayout>
-        <ListView ItemsSource="{Binding Path=Entries}" SelectedItem="" SelectionMode="Single" MaximumHeightRequest="500">
-        </ListView>
+        <controls:DataGrid ItemsSource="{Binding Entries}"
+                           UseAutoColumns="False"
+                           HorizontalOptions="Center"
+                           SelectedItems="{Binding SelectedEntrie}"
+                           SelectionColor="Blue"
+                           BackgroundColor="AliceBlue"
+                           LineSeperatorColor="Black">
 
-        <Button Text="Ausgeählter Eintrag Löschen" Command="{Binding Path=DeleteEntrieCommand}"></Button>
+            <controls:DataGrid.Columns>
+                <controls:DataGridSelectionColumn  />
+                <controls:DataGridColumn Binding="{Binding Description}" Title="Beschreibung"/>
+                <controls:DataGridColumn Binding="{Binding Amount}" Title="Geld gespart in CHF"/>
+            </controls:DataGrid.Columns>
+        </controls:DataGrid>
+
+        <Button Text="Ausgewählte Einträge Löschen" Command="{Binding Path=DeleteEntrieCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

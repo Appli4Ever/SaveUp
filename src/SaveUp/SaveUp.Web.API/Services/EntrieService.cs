@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SaveUp.Models.ViewModels;
 using SaveUp.Web.API.Entities;
 
@@ -72,6 +73,37 @@ public class EntrieService : IEntrieService
             return model;
         }
         catch
+        {
+            return null;
+        }
+    }
+
+    public async Task<List<EntrieViewModel>?> DeleteRange(List<int> idList)
+    {
+        try
+        {
+            var entries = await this.context.Entries.Where(e => idList.Contains(e.Id))
+                                   .ToListAsync();
+
+            if (entries.IsNullOrEmpty())
+            {
+                return null;
+            }
+
+            this.context.Entries.RemoveRange(entries);
+
+            await this.context.SaveChangesAsync();
+
+            return entries.Select(e => new EntrieViewModel()
+            {
+                Amount = e.Amount,
+                Created = e.Created,
+                Description = e.Description,
+                Id = e.Id
+            }).ToList();
+
+        }
+        catch (System.Exception e)
         {
             return null;
         }

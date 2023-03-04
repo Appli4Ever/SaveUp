@@ -12,7 +12,6 @@ namespace SaveUp.Services.Http
         public HttpUserService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
-            this.httpClient.BaseAddress = new Uri("muellersimon.internet-box.ch");
         }
 
         public async Task<LoginStatus> Login(UserViewModel model)

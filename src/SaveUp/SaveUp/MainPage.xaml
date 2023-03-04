@@ -11,16 +11,17 @@
 
             <Image
                 Source="appimage.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="200"
-                Background="Transparent"
-                BackgroundColor="Transparent"
                 HorizontalOptions="Center" />
 
             <Label
                 Text="SaveUp"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
+                HorizontalOptions="Center" />
+            <Label
+                Text="Von Simon Müller"
+                FontSize="24"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>

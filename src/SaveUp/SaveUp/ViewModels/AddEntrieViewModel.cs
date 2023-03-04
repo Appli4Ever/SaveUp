@@ -9,11 +9,33 @@ namespace SaveUp.ViewModels
     {
 
         private readonly HttpEntrieService entrieService;
+        private EntrieViewModel entrie = new();
 
         public Command AddEntrieCommand { get; set; }
 
-        public EntrieViewModel Entrie { get; set; }
+        public string Description
+        {
+            get => this.entrie.Description;
+            set
+            {
+                if (Equals(value, this.entrie.Description)) return;
+                this.entrie.Description = value;
+                this.OnPropertyChanged();
+                this.AddEntrieCommand.ChangeCanExecute();
+            }
+        }
 
+        public double Amount
+        {
+            get => this.entrie.Amount;
+            set
+            {
+                if (Equals(value, this.entrie.Amount)) return;
+                this.entrie.Amount = value;
+                this.OnPropertyChanged();
+                this.AddEntrieCommand.ChangeCanExecute();
+            }
+        }
 
         public AddEntrieViewModel(HttpEntrieService entrieService)
         {
@@ -23,7 +45,7 @@ namespace SaveUp.ViewModels
 
         public async Task OnAddEntrie()
         {
-            var result = await this.entrieService.Create(this.Entrie);
+            var result = await this.entrieService.Create(this.entrie);
 
             if (result)
             {
@@ -39,13 +61,7 @@ namespace SaveUp.ViewModels
 
         public bool CanAddEntrie()
         {
-            if (Validator.TryValidateObject(this.Entrie, new ValidationContext(this.Entrie, null, null), new List<ValidationResult>()))
-            {
-                return true;
-            }
-
-            return false;
+            return !string.IsNullOrWhiteSpace(this.entrie.Description) && this.entrie.Amount > 0;
         }
-
     }
 }

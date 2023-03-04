@@ -4,10 +4,9 @@ namespace SaveUp.Pages;
 
 public partial class Register : ContentPage
 {
-    public Register(LoginRegisterViewModel loginRegisterViewModel)
+    public Register(RegisterViewModel loginRegisterViewModel)
     {
         this.InitializeComponent();
-        loginRegisterViewModel.IsRegisterViewModle = true;
         this.BindingContext = loginRegisterViewModel;
     }
 }

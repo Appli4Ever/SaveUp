@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -111,5 +111,31 @@ public class EntrieServiceTests
         var result = await testee.Create(vm);
 
         result.Should().BeEquivalentTo(vm);
+    }
+
+    [Test]
+    public async Task DeleteRange_EintragVorhanden_GibtEintraegeZurueck()
+    {
+        var entries = TestDaten.GetEntries();
+        var context = new SaveUpDbContextBuilder().AddEntries(entries).Build();
+
+        var testee = new EntrieService(context);
+        
+        var result = await testee.DeleteRange(entries.Select(e => e.Id).ToList());
+
+        result.Should().BeEquivalentTo(entries, e => e.ExcludingMissingMembers());
+    }
+
+    [Test]
+    public async Task DeleteRange_EintragNichtVorhanden_GibtNullZurueck()
+    {
+        var entries = TestDaten.GetEntries();
+        var context = new SaveUpDbContextBuilder().AddEntries(entries).Build();
+
+        var testee = new EntrieService(context);
+
+        var result = await testee.DeleteRange(new List<int>());
+
+        result.Should().BeNull();
     }
 }

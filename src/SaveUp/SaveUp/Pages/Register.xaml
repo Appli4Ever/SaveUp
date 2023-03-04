@@ -5,12 +5,12 @@
              Title="Registrieren">
     <VerticalStackLayout>
         <Label Text="Benutzername"></Label>
-        <Entry Text="{Binding Path=User.Username}"></Entry>
+        <Entry Text="{Binding Path=Username}"></Entry>
 
         <Label Text="Passwort"></Label>
-        <Entry Text="{Binding Path=User.Password}"
+        <Entry Text="{Binding Path=Password}"
                IsPassword="True"></Entry>
 
-        <Button Text="Registrieren" Command="{Binding Path=LoginRegisterCommand}"></Button>
+        <Button Text="Registrieren" Command="{Binding Path=RegisterCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

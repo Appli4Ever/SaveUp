@@ -10,7 +10,6 @@ namespace SaveUp.Services.Http
         public HttpEntrieService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
-            this.httpClient.BaseAddress = new Uri("muellersimon.internet-box.ch");
         }
 
         public async Task<bool> Create(EntrieViewModel model)
@@ -27,17 +26,33 @@ namespace SaveUp.Services.Http
             }
         }
 
-        public async Task<bool> Delete(EntrieViewModel model)
+        public async Task<bool> DeleteRange(IEnumerable<EntrieViewModel> model)
         {
             try
             {
-                var result = await this.httpClient.PostAsJsonAsync("api/Entrie/Delete", model);
+                var idList = model.Select(e => e.Id).ToArray();
+
+                var result = await this.httpClient.PostAsJsonAsync($"api/Entrie/Delete", idList);
 
                 return result.IsSuccessStatusCode;
             }
             catch
             {
                 return false;
+            }
+        }
+
+        public async Task<List<EntrieViewModel>> All()
+        {
+            try
+            {
+                var result = await this.httpClient.GetFromJsonAsync<List<EntrieViewModel>>("api/Entrie/All");
+
+                return result;
+            }
+            catch
+            {
+                return new List<EntrieViewModel>();
             }
         }
     }

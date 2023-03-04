@@ -4,7 +4,7 @@ namespace SaveUp.Pages;
 
 public partial class Login : ContentPage
 {
-    public Login(LoginRegisterViewModel loginRegisterViewModel)
+    public Login(LoginViewModel loginRegisterViewModel)
     {
         this.InitializeComponent();
         this.BindingContext = loginRegisterViewModel;

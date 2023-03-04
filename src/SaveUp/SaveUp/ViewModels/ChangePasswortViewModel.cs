@@ -7,10 +7,33 @@ namespace SaveUp.ViewModels
     public class ChangePasswortViewModel : ViewModelBase
     {
         private readonly HttpUserService userService;
+        private PasswordViewModel newPasword = new();
 
         public Command PasswordChangeCommand { get; set; }
 
-        public PasswordViewModel NewPasword { get; set; }
+        public string Pasword
+        {
+            get => this.newPasword.Password;
+            set
+            {
+                if (Equals(value, this.newPasword.Password)) return;
+                this.newPasword.Password = value;
+                this.OnPropertyChanged();
+                this.PasswordChangeCommand.ChangeCanExecute();
+            }
+        }
+
+        public string VerifyPasword
+        {
+            get => this.newPasword.Password;
+            set
+            {
+                if (Equals(value, this.newPasword.VerifiyPassword)) return;
+                this.newPasword.VerifiyPassword = value;
+                this.OnPropertyChanged();
+                this.PasswordChangeCommand.ChangeCanExecute();
+            }
+        }
 
         public ChangePasswortViewModel(HttpUserService userService)
         {
@@ -20,7 +43,7 @@ namespace SaveUp.ViewModels
 
         public async Task OnPasswordChange()
         {
-            var result = await this.userService.ChangePassword(this.NewPasword);
+            var result = await this.userService.ChangePassword(this.newPasword);
 
             if (result)
             {
@@ -36,7 +59,7 @@ namespace SaveUp.ViewModels
 
         public bool CanChangePassword()
         {
-            return !string.IsNullOrWhiteSpace(this.NewPasword.VerifiyPassword) && this.NewPasword.VerifiyPassword == this.NewPasword.Password;
+            return !string.IsNullOrWhiteSpace(this.newPasword.VerifiyPassword) && this.newPasword.VerifiyPassword == this.newPasword.Password;
         }
 
     }

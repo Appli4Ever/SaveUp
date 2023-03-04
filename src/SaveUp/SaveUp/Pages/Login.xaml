@@ -7,13 +7,13 @@
     <VerticalStackLayout>
 
         <Label Text="Benutzername"></Label>
-        <Entry Text="{Binding Path=User.Username}"></Entry>
+        <Entry Text="{Binding Path=Username}"></Entry>
 
         <Label Text="Passwort"></Label>
-        <Entry Text="{Binding Path=User.Password}"
+        <Entry Text="{Binding Path=Password}"
                IsPassword="True"></Entry>
 
-        <Button Text="Anmelden" Command="{Binding Path=LoginRegisterCommand}"></Button>
+        <Button Text="Anmelden" Command="{Binding Path=LoginCommand}"></Button>
 
     </VerticalStackLayout>
 </ContentPage>

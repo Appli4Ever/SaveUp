@@ -6,8 +6,10 @@
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
 
     <VerticalStackLayout>
-        <Entry Text="{Binding Path=Entrie.Description}"></Entry>
-        <Entry Text="{Binding Path=Entrie.Amount}"></Entry>
+        <Label Text="Beschreibung"></Label>
+        <Entry Text="{Binding Path=Description}"></Entry>
+        <Label Text="Geld gespart in CHF"></Label>
+        <Entry Text="{Binding Path=Amount}"></Entry>
         <Button Text="Erfassen" Command="{Binding Path=AddEntrieCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

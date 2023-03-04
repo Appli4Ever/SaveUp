@@ -28,6 +28,13 @@
             <param name="id">Id des Eintrag</param>
             <returns>Der gelöschte Eintrag</returns>
         </member>
+        <member name="M:SaveUp.Web.API.Controllers.EntrieController.Delete(System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Löscht alle Einträge mit der ID
+            </summary>
+            <param name="idList">Liste der Id</param>
+            <returns></returns>
+        </member>
         <member name="M:SaveUp.Web.API.Controllers.EntrieController.Create(SaveUp.Models.ViewModels.EntrieViewModel)">
             <summary>
             Erstellt einen Eintrag

@@ -1,5 +1,6 @@
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using SaveUp.Pages;
 using SaveUp.Services.Http;
 using SaveUp.ViewModels;
 
@@ -19,6 +20,7 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
+        builder.Services.AddPages();
         builder.Services.AddSingleton<HttpClient>();
         builder.Services.AddHttpService();
         builder.Services.AddViewModels();
@@ -27,8 +29,17 @@ public static class MauiProgram
         builder.Logging.AddDebug();
 #endif
 
-        return builder.Build();
+
+        var host = builder.Build();
+        var httpClient = host.Services.GetRequiredService<HttpClient>();
+
+
+#if DEBUG
+        httpClient.BaseAddress = new Uri("http://localhost:5021/");
+#else
+        httpClient.BaseAddress = new Uri("http://muellersimon.internet-box.ch");
+#endif
+
+        return host;
     }
-
-
 }

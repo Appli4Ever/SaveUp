@@ -8,11 +8,25 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <Tab Title="Home"
-             Icon="Home">
+
+        <Tab Title="Home">
             <ShellContent Title="Home"
                           ContentTemplate="{DataTemplate local:MainPage}"
-                          Route="MainPage" />
+                          Route="MainPage"/>
+        </Tab>
+
+        <Tab Title="Login">
+            <ShellContent Title="Login"
+                          ContentTemplate="{DataTemplate pages:Login}"
+                          Route="Login" />
+
+            <ShellContent Title="Registrieren"
+                          ContentTemplate="{DataTemplate pages:Register}"
+                          Route="Register"/>
+
+            <ShellContent Title="Passwort Ändern"
+                          ContentTemplate="{DataTemplate pages:ChangePassword}"
+                          Route="ChangePasswort"/>
         </Tab>
 
         <Tab Title="Einträge">

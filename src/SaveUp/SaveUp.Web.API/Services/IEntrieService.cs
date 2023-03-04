@@ -9,4 +9,6 @@ public interface IEntrieService
     Task<EntrieViewModel?> Delete(int id);
 
     Task<EntrieViewModel?> Create(EntrieViewModel model);
+
+    Task<List<EntrieViewModel>?> DeleteRange(List<int> idList);
 }
