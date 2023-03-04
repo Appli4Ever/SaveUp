@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaveUp.Pages.AddEntrie"
              Title="Eintrag Erfassen"
-             xmlns:vm="clr-namespace:SaveUp.ViewModels">
+             xmlns:vm="clr-namespace:SaveUp.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design">
 
-    <ContentPage.BindingContext>
-        <vm:AddEntrieViewModel/>
-    </ContentPage.BindingContext>
+    <d:ContentPage.BindingContext>
+        <vm:AddEntrieViewModel></vm:AddEntrieViewModel>
+    </d:ContentPage.BindingContext>
+
     <VerticalStackLayout>
-        <Entry Text="{Binding Path=}"></Entry>
-        <Entry Text="{Binding Path=Amount}"></Entry>
-        <Button Text="Erfassen" Command="{Binding Path=}"></Button>
+        <Entry Text="{Binding Path=Entrie.Description}"></Entry>
+        <Entry Text="{Binding Path=Entrie.Amount}"></Entry>
+        <Button Text="Erfassen" Command="{Binding Path=AddEntrieCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

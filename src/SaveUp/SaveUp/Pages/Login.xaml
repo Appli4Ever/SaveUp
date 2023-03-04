@@ -4,10 +4,6 @@
              x:Class="SaveUp.Pages.Login"
              Title="Login"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
-    <ContentPage.BindingContext>
-        <vm:LoginRegisterViewModel></vm:LoginRegisterViewModel>
-    </ContentPage.BindingContext>
-
     <VerticalStackLayout>
 
         <Label Text="Benutzername"></Label>

@@ -4,9 +4,6 @@
              x:Class="SaveUp.Pages.Entries"
              Title="Einträge"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
-    <ContentPage.BindingContext>
-        <vm:EntriesViewModel></vm:EntriesViewModel>
-    </ContentPage.BindingContext>
     <VerticalStackLayout>
         <ListView>
 

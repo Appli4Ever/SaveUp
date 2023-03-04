@@ -1,6 +1,7 @@
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using SaveUp.Services.Http;
+using SaveUp.ViewModels;
 
 namespace SaveUp;
 
@@ -20,6 +21,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<HttpClient>();
         builder.Services.AddHttpService();
+        builder.Services.AddViewModels();
 
 #if DEBUG
         builder.Logging.AddDebug();
