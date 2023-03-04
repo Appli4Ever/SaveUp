@@ -124,7 +124,7 @@ stages:
           - task: SSH@0
             displayName: 'Unzip and Start Test Project'
             inputs:
-              sshEndpoint: 'securitySonarSSH'
+              sshEndpoint: 'SimonRaspiSSH'
               runOptions: 'inline'
-              inline: 'cd $(prTargetFolder);unzip securitySonar.Web.zip;rm securitySonar.Web.zip;nohup dotnet securitySonar.Web.dll -p ''5200'' > /dev/null 2>&1 &'
+              inline: 'cd $(prTargetFolder);unzip SaveUp.Web.API.zip;rm securitySonar.Web.zip;nohup dotnet SaveUp.Web.API.dll -p ''5000'' > /dev/null 2>&1 &'
               readyTimeout: '20000'   
