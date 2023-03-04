@@ -75,7 +75,7 @@ stages:
 
 - stage: saveUp_prod
   variables:
-  - group: Test
+  - group: Prod
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   jobs:  
   - deployment: saveUp_prod
@@ -93,30 +93,38 @@ stages:
             artifact: 'saveUp-database-deployment'
             displayName: 'Download database deployment packages'
 
+          - task: SSH@0
+            displayName: 'Kill Prod Prozess'
+            inputs:
+              sshEndpoint: 'securitySonarSSH'
+              runOptions: 'commands'
+              commands: 'kill $(ps aux | grep ''$(prTargetFolder)/SaveUp.Web.API.dll'' | awk ''{print $2}'')'
+              readyTimeout: '20000'
+                
           - task: DotNetCoreCLI@2
-            displayName: 'Update database'
+            displayName: 'Update Prod database'
             inputs:
               command: custom
-              custom: SaveUp.MigrateDatabase.dll
+              custom: SaveUp.MigrateDatabse.CLI.dll
               arguments: '-c "$(ConnectionString)"'
               workingDirectory: '$(Agent.BuildDirectory)/saveUp-database-deployment'              
 
+        
           - task: CopyFilesOverSSH@0
-            displayName: 'Copy Files over SSH'
+            displayName: 'Copy Prod Zip over SSH'
             inputs:
-              sshEndpoint: 'SaveUpSSH'
+              sshEndpoint: 'SimonRaspiSSH'
               sourceFolder: '$(Agent.BuildDirectory)/$(artifactName)'
               contents: '**'
-              targetFolder: '$(itTargetFolder)'
+              targetFolder: '$(prTargetFolder)'
               cleanTargetFolder: true
               readyTimeout: '20000'
               failOnEmptySource: true
               
           - task: SSH@0
-            displayName: 'Unzip and Start Project'
+            displayName: 'Unzip and Start Test Project'
             inputs:
-              sshEndpoint: 'SaveUpSSH'
-              runOptions: 'commands'
-              commands: 'unzip $(itTargetFolder)/SaveUp.Web.API.zip -d $(itTargetFolder);rm $(itTargetFolder)/SveUp.Web.API.zip;dotnet $(itTargetFolder)/SaveUp.API.Web.dll &'
-              readyTimeout: '20000'        
-                     
+              sshEndpoint: 'securitySonarSSH'
+              runOptions: 'inline'
+              inline: 'cd $(prTargetFolder);unzip securitySonar.Web.zip;rm securitySonar.Web.zip;nohup dotnet securitySonar.Web.dll -p ''5200'' > /dev/null 2>&1 &'
+              readyTimeout: '20000'   
