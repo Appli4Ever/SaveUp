@@ -8,7 +8,9 @@ pool: databinding self hosted
 variables:
   solution: '**/SaveUp.sln'
   serverProject: '**/SaveUp.Web.API.csproj'
-  databaseDeploymentProject: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/SaveUp.MigrateDatabase.CLI.csproj'
+  mauiProject: '**/SaveUp.csproj'
+  testProject: '**/SaveUp.Web.API.Tests.csproj'
+  databaseProject: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/SaveUp.MigrateDatabase.CLI.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   artifactName: 'saveUp-app'
@@ -32,6 +34,11 @@ stages:
       inputs:
         packageType: 'sdk'
         version: '7.x'
+    
+    - task: CmdLine@2
+      displayName: 'Install dotnet workload for MAUI'
+      inputs:
+        script: 'dotnet workload install maui'
 
     - task: DotNetCoreCLI@2
       displayName: Build
@@ -43,7 +50,7 @@ stages:
       displayName: Test
       inputs:
         command: test
-        projects: '$(solution)'
+        projects: '$(testProject)'
         arguments: '--configuration $(BuildConfiguration)'
         
     - task: CopyFiles@2
