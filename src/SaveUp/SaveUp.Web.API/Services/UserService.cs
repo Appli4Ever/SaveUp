@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SaveUp.Models.Enum;
 using SaveUp.Models.ViewModels;
 using SaveUp.Web.API.Entities;
 

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SaveUp.Models.Enum;
 using SaveUp.Models.ViewModels;
 using SaveUp.Web.API.Entities;
 using SaveUp.Web.API.Services;
