@@ -7,5 +7,10 @@ public partial class App : Application
         this.InitializeComponent();
 
         this.MainPage = new AppShell();
+
+        AppDomain.CurrentDomain.UnhandledException += (sender, error) =>
+        {
+           Console.WriteLine(error);
+        };
     }
 }

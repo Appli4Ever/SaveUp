@@ -19,12 +19,21 @@ namespace SaveUp.Services.Http
             {
                 var result = await this.httpClient.PostAsJsonAsync("api/Entrie/Create", model);
 
-                if (result.IsSuccessStatusCode)
-                {
-                    return true;
-                }
-
+                return result.IsSuccessStatusCode;
+            }
+            catch
+            {
                 return false;
+            }
+        }
+
+        public async Task<bool> Delete(EntrieViewModel model)
+        {
+            try
+            {
+                var result = await this.httpClient.PostAsJsonAsync("api/Entrie/Delete", model);
+
+                return result.IsSuccessStatusCode;
             }
             catch
             {

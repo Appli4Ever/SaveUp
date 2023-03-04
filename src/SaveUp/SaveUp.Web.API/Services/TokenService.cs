@@ -15,7 +15,7 @@ namespace SaveUp.Web.API.Services
             this.key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));
         }
 
-        public string CreateToken(int id,string username)
+        public string CreateToken(int id, string username)
         {
             //Creating Claims. You can add more information in these claims. For example email id.
             var claims = new List<Claim>

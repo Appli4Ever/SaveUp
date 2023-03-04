@@ -5,8 +5,9 @@
              Title="Einträge"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
     <VerticalStackLayout>
-        <ListView>
-
+        <ListView ItemsSource="{Binding Path=Entries}" SelectedItem="" SelectionMode="Single" MaximumHeightRequest="500">
         </ListView>
+
+        <Button Text="Ausgeählter Eintrag Löschen" Command="{Binding Path=DeleteEntrieCommand}"></Button>
     </VerticalStackLayout>
 </ContentPage>

@@ -42,5 +42,33 @@ namespace SaveUp.Services.Http
                 return LoginStatus.Faild;
             }
         }
+
+        public async Task<bool> Register(UserViewModel model)
+        {
+            try
+            {
+                var result = await this.httpClient.PostAsJsonAsync("api/User/CreateUser", model);
+
+                return result.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ChangePassword(PasswordViewModel model)
+        {
+            try
+            {
+                var result = await this.httpClient.PostAsJsonAsync("api/User/ChangePassword", model);
+
+                return result.IsSuccessStatusCode;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -2,16 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaveUp.Pages.Login"
-             Title="Login"
+             Title="Anmelden"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
     <VerticalStackLayout>
 
         <Label Text="Benutzername"></Label>
-        <Entry Text="{Binding Path=Username}"></Entry>
+        <Entry Text="{Binding Path=User.Username}"></Entry>
 
         <Label Text="Passwort"></Label>
-        <Entry Text="{Binding Path=Password}"
+        <Entry Text="{Binding Path=User.Password}"
                IsPassword="True"></Entry>
+
+        <Button Text="Anmelden" Command="{Binding Path=LoginRegisterCommand}"></Button>
 
     </VerticalStackLayout>
 </ContentPage>

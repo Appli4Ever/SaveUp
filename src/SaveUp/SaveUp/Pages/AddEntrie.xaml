@@ -3,12 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaveUp.Pages.AddEntrie"
              Title="Eintrag Erfassen"
-             xmlns:vm="clr-namespace:SaveUp.ViewModels"
-             xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design">
-
-    <d:ContentPage.BindingContext>
-        <vm:AddEntrieViewModel></vm:AddEntrieViewModel>
-    </d:ContentPage.BindingContext>
+             xmlns:vm="clr-namespace:SaveUp.ViewModels">
 
     <VerticalStackLayout>
         <Entry Text="{Binding Path=Entrie.Description}"></Entry>

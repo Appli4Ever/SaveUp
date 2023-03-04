@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Maui.Alerts;
-using CommunityToolkit.Maui.Core;
 using SaveUp.Models.ViewModels;
 using SaveUp.Services.Http;
 
@@ -21,7 +20,7 @@ namespace SaveUp.ViewModels
             this.entrieService = entrieService;
             this.AddEntrieCommand = new Command(async () => await this.OnAddEntrie(), this.CanAddEntrie);
         }
-        
+
         public async Task OnAddEntrie()
         {
             var result = await this.entrieService.Create(this.Entrie);
