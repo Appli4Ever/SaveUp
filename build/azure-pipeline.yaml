@@ -8,6 +8,7 @@ pool: databinding self hosted
 variables:
   solution: '**/SaveUp.sln'
   serverProject: '**/SaveUp.Web.API.csproj'
+  mauiProject: '**/SaveUp.csproj'
   databaseDeploymentProject: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/SaveUp.MigrateDatabase.CLI.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
@@ -39,10 +40,16 @@ stages:
         script: 'dotnet workload install maui'
 
     - task: DotNetCoreCLI@2
+      displayName: 'Build MAUI'
+      inputs:
+        projects: '$(mauiProject)'    
+        arguments: '--configuration $(BuildConfiguration) /p:Version=$(Build.BuildNumber) -f net7.0-android'
+
+    - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
         projects: '$(solution)'
-        arguments: '--configuration $(BuildConfiguration) /p:Version=$(Build.BuildNumber) -f net7.0-android'
+        arguments: '--configuration $(BuildConfiguration) /p:Version=$(Build.BuildNumber)'
         
     - task: DotNetCoreCLI@2
       displayName: Test
