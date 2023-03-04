@@ -4,11 +4,29 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SaveUp"
+    xmlns:pages="clr-namespace:SaveUp.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <Tab Title="Home"
+             Icon="Home">
+            <ShellContent Title="Home"
+                          ContentTemplate="{DataTemplate local:MainPage}"
+                          Route="MainPage" />
+        </Tab>
+
+        <Tab Title="Einträge">
+
+            <ShellContent Title="Einträge"
+                  ContentTemplate="{DataTemplate pages:Entries}"
+                  Route="Entries"/>
+        </Tab>
+
+        <Tab Title="Erfassen">
+            <ShellContent Title="Erfassen"
+                          ContentTemplate="{DataTemplate pages:AddEntrie}"
+                          Route="AddEntrie"/>
+        </Tab>
+    </TabBar>
 
 </Shell>

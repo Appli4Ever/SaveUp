@@ -1,6 +1,5 @@
-﻿using SaveUp.Web.API.Entities;
+using SaveUp.Web.API.Entities;
 using System.Globalization;
-using System.Security.Claims;
 
 namespace SaveUp.Web.API.Services;
 

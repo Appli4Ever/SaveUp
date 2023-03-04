@@ -1,7 +1,6 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using SaveUp.Web.API;
 using SaveUp.Web.API.Services;
@@ -24,7 +23,7 @@ builder.Services.AddSwaggerGen(
             {
                 Version = "v1",
                 Title = "SaveUp API",
-                Description = "API für Modul 335 SaveUp",
+                Description = "API fÃ¼r Modul 335 SaveUp",
             });
         var xmlCommentPath = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlCommentPath));
