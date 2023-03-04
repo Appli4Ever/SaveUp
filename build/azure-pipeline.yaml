@@ -96,7 +96,7 @@ stages:
           - task: SSH@0
             displayName: 'Kill Prod Prozess'
             inputs:
-              sshEndpoint: 'securitySonarSSH'
+              sshEndpoint: 'SimonRaspiSSH'
               runOptions: 'commands'
               commands: 'kill $(ps aux | grep ''$(prTargetFolder)/SaveUp.Web.API.dll'' | awk ''{print $2}'')'
               readyTimeout: '20000'
