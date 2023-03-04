@@ -4,6 +4,70 @@
         <name>SaveUp.Web.API</name>
     </assembly>
     <members>
+        <member name="T:SaveUp.Web.API.Controllers.EntrieController">
+            <summary>
+            Eintrag Controller
+            </summary>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.EntrieController.#ctor(SaveUp.Web.API.Services.IEntrieService)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="entrieService">Entrie Service</param>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.EntrieController.All">
+            <summary>
+            Gibt alle Einträge zurück
+            </summary>
+            <returns>Liste aller Einträge</returns>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.EntrieController.Delete(System.Int32)">
+            <summary>
+            Löscht den Eintrag mit der Id
+            </summary>
+            <param name="id">Id des Eintrag</param>
+            <returns>Der gelöschte Eintrag</returns>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.EntrieController.Create(SaveUp.Models.ViewModels.EntrieViewModel)">
+            <summary>
+            Erstellt einen Eintrag
+            </summary>
+            <param name="model">Der zu erstellende Eintrag</param>
+            <returns>Der erstellte Eintrag</returns>
+        </member>
+        <member name="T:SaveUp.Web.API.Controllers.UserController">
+            <summary>
+            Benutzer Controller
+            </summary>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.UserController.#ctor(SaveUp.Web.API.Services.IUserService)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="userService">Benutzer Service</param>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.UserController.CreateUser(SaveUp.Models.ViewModels.UserViewModel)">
+            <summary>
+            Erstellt einen Benutzer
+            (Username muss eindeutig sein)
+            </summary>
+            <param name="model">Den zu erstellenden Benutzer</param>
+            <returns>Username des erstellten Benutzer</returns>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.UserController.Login(SaveUp.Models.ViewModels.UserViewModel)">
+            <summary>
+            Überprüft die Logindaten eines Benutzers
+            </summary>
+            <param name="model">Benutzerlogin Daten</param>
+            <returns>TokenViewModel mit dem Status und Token</returns>
+        </member>
+        <member name="M:SaveUp.Web.API.Controllers.UserController.ChangePassword(SaveUp.Models.ViewModels.PasswordViewModel)">
+            <summary>
+            Ändert das Passwort des angemeldeten Benutzer
+            </summary>
+            <param name="model">PasswortViewModel mit doppelter Passwort Eingabe</param>
+            <returns>ActionResult</returns>
+        </member>
         <member name="T:SaveUp.Web.API.Migrations.init">
             <inheritdoc />
         </member>
