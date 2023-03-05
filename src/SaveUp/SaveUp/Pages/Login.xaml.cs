@@ -9,4 +9,9 @@ public partial class Login : ContentPage
         this.InitializeComponent();
         this.BindingContext = loginRegisterViewModel;
     }
+
+    private async void Button_OnClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//Register");
+    }
 }

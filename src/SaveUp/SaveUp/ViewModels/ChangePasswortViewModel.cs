@@ -11,7 +11,24 @@ namespace SaveUp.ViewModels
 
         public Command PasswordChangeCommand { get; set; }
 
-        public string Pasword
+        private bool mainButtonIsEnabled = true;
+
+        public bool MainButtonIsEnabled
+        {
+            get => this.mainButtonIsEnabled;
+            set
+            {
+                if (Equals(value, this.mainButtonIsEnabled))
+                {
+                    return;
+                }
+
+                this.SetField(ref this.mainButtonIsEnabled, value);
+            }
+        }
+
+
+        public string Password
         {
             get => this.newPasword.Password;
             set
@@ -23,7 +40,7 @@ namespace SaveUp.ViewModels
             }
         }
 
-        public string VerifyPasword
+        public string VerifyPassword
         {
             get => this.newPasword.Password;
             set
@@ -43,18 +60,22 @@ namespace SaveUp.ViewModels
 
         public async Task OnPasswordChange()
         {
+            this.MainButtonIsEnabled = false;
+
             var result = await this.userService.ChangePassword(this.newPasword);
 
             if (result)
             {
                 var toast = Toast.Make("Passwort geändert");
                 await toast.Show();
+
+                await Shell.Current.GoToAsync("//MainPage");
             }
-            else
-            {
-                var toast = Toast.Make("Fehlgeschlagen");
-                await toast.Show();
-            }
+
+            this.Password = string.Empty;
+            this.VerifyPassword = string.Empty;
+
+            this.MainButtonIsEnabled = true;
         }
 
         public bool CanChangePassword()

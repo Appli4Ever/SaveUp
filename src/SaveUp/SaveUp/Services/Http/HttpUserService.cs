@@ -8,17 +8,18 @@ namespace SaveUp.Services.Http
     public class HttpUserService
     {
         private readonly HttpClient httpClient;
+        private readonly UserIdentity user;
 
-        public HttpUserService(HttpClient httpClient)
+        public HttpUserService(HttpClient httpClient, UserIdentity user)
         {
             this.httpClient = httpClient;
+            this.user = user;
         }
 
         public async Task<LoginStatus> Login(UserViewModel model)
         {
             try
             {
-
                 var result = await this.httpClient.PostAsJsonAsync("api/User/Login", model);
 
                 if (result.IsSuccessStatusCode)
@@ -29,6 +30,9 @@ namespace SaveUp.Services.Http
                     {
                         this.httpClient.DefaultRequestHeaders.Authorization =
                             new AuthenticationHeaderValue("Bearer", content.Token);
+
+                        this.user.Username = model.Username;
+                        this.user.IsLoggedIn = true;
 
                         return content.LoginStatus;
                     }

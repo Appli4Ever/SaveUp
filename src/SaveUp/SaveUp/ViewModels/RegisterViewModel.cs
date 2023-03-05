@@ -48,6 +48,23 @@ namespace SaveUp.ViewModels
             }
         }
 
+        private bool mainButtonIsEnabled = true;
+
+        public bool MainButtonIsEnabled
+        {
+            get => this.mainButtonIsEnabled;
+            set
+            {
+                if (Equals(value, this.mainButtonIsEnabled))
+                {
+                    return;
+                }
+
+                this.SetField(ref this.mainButtonIsEnabled, value);
+            }
+        }
+
+
         public RegisterViewModel(HttpUserService userService)
         {
             this.userService = userService;
@@ -58,18 +75,25 @@ namespace SaveUp.ViewModels
 
         public async Task OnRegister()
         {
+
+            this.MainButtonIsEnabled = false;
             var result = await this.userService.Register(this.user);
 
             if (result)
             {
                 var toast = Toast.Make("Registrierung Erfolgreich");
                 await toast.Show();
+                this.Username = string.Empty;
+                await Shell.Current.GoToAsync("//Login");
             }
             else
             {
                 var toast = Toast.Make("Fehlgeschlagen");
                 await toast.Show();
             }
+
+            this.MainButtonIsEnabled = true;
+            this.Password = string.Empty;
         }
 
         public bool CanExecuteRegister()

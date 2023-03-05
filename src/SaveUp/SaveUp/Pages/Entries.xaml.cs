@@ -16,7 +16,7 @@ public partial class Entries : ContentPage
 
     protected override void OnAppearing()
     {
-        base.OnAppearing();
         this.OnApperingPage.Invoke(this, EventArgs.Empty);
+        base.OnAppearing();
     }
 }

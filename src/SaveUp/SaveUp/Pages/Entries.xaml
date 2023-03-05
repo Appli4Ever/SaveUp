@@ -5,22 +5,34 @@
              Title="Einträge"
              xmlns:vm="clr-namespace:SaveUp.ViewModels"
              xmlns:controls="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material">
-    <VerticalStackLayout>
+    <VerticalStackLayout Margin="150,0,150,0">
         <controls:DataGrid ItemsSource="{Binding Entries}"
                            UseAutoColumns="False"
                            HorizontalOptions="Center"
                            SelectedItems="{Binding SelectedEntrie}"
                            SelectionColor="Blue"
                            BackgroundColor="AliceBlue"
-                           LineSeperatorColor="Black">
+                           LineSeperatorColor="Black"
+                           MaximumHeightRequest="500"
+                           Margin="0,20,0,0">
 
             <controls:DataGrid.Columns>
-                <controls:DataGridSelectionColumn  />
+                <controls:DataGridSelectionColumn>
+                </controls:DataGridSelectionColumn>
                 <controls:DataGridColumn Binding="{Binding Description}" Title="Beschreibung"/>
                 <controls:DataGridColumn Binding="{Binding Amount}" Title="Geld gespart in CHF"/>
             </controls:DataGrid.Columns>
+
+            <controls:DataGrid.EmptyView>
+                <Label Text="Keine Einträge"></Label>
+            </controls:DataGrid.EmptyView>
         </controls:DataGrid>
 
-        <Button Text="Ausgewählte Einträge Löschen" Command="{Binding Path=DeleteEntrieCommand}"></Button>
+        <HorizontalStackLayout HorizontalOptions="Center" Margin="0,20,0,0">
+            <Label Text="Total gespart:" FontAttributes="Bold" Margin="0,0,5,0"/>
+
+            <Label Text="{Binding Path=TotalAmount}" FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+        <Button Text="Ausgewählte Einträge Löschen" IsEnabled="{Binding Path=MainButtonIsEnabled}" Command="{Binding Path=DeleteEntrieCommand}" Margin="0,20,0,0"></Button>
     </VerticalStackLayout>
 </ContentPage>

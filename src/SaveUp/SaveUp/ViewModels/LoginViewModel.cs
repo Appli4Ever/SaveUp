@@ -43,6 +43,23 @@ namespace SaveUp.ViewModels
             }
         }
 
+        private bool mainButtonIsEnabled = true;
+
+        public bool MainButtonIsEnabled
+        {
+            get => this.mainButtonIsEnabled;
+            set
+            {
+                if (Equals(value, this.mainButtonIsEnabled))
+                {
+                    return;
+                }
+
+                this.SetField(ref this.mainButtonIsEnabled, value);
+            }
+        }
+
+
         public Command LoginCommand { get; set; }
 
         public LoginViewModel(HttpUserService userService)
@@ -55,23 +72,30 @@ namespace SaveUp.ViewModels
 
         public async Task OnLogin()
         {
-            var result = await this.userService.Login(this.user);
+            this.MainButtonIsEnabled = false;
 
-            var toast = Toast.Make("");
+            var result = await this.userService.Login(this.user);
 
             switch (result)
             {
                 case LoginStatus.Success:
-                    toast = Toast.Make("Login Erfolgreich");
+                    var toast = Toast.Make("Login Erfolgreich");
+                    await toast.Show();
+                    this.Username = string.Empty;
+                    await Shell.Current.GoToAsync("//MainPage");
                     break;
                 case LoginStatus.Faild:
                     toast = Toast.Make("Login Fehlgeschlagen");
+                    await toast.Show();
                     break;
                 case LoginStatus.Blocked:
                     toast = Toast.Make("Login Blockiert");
+                    await toast.Show();
                     break;
             }
-            await toast.Show();
+
+            this.MainButtonIsEnabled = true;
+            this.Password = string.Empty;
         }
 
 

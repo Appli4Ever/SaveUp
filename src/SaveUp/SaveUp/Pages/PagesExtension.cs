@@ -4,6 +4,7 @@ namespace SaveUp.Pages
     {
         public static void AddPages(this IServiceCollection serviceCollection)
         {
+            serviceCollection.AddTransient<MainPage>();
             serviceCollection.AddTransient<AppShell>();
             serviceCollection.AddTransient<AddEntrie>();
             serviceCollection.AddTransient<ChangePassword>();

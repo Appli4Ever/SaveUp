@@ -16,6 +16,24 @@ namespace SaveUp.ViewModels
 
         public ObservableCollection<EntrieViewModel> Entries { get; set; } = new();
 
+        private bool mainButtonIsEnabled = true;
+
+        public bool MainButtonIsEnabled
+        {
+            get => this.mainButtonIsEnabled;
+            set
+            {
+                if (Equals(value, this.mainButtonIsEnabled))
+                {
+                    return;
+                }
+
+                this.SetField(ref this.mainButtonIsEnabled, value);
+            }
+        }
+
+        public double TotalAmount => this.Entries.Sum(e => e.Amount);
+
         public EntriesViewModel(HttpEntrieService entrieService)
         {
             this.entrieService = entrieService;
@@ -30,14 +48,21 @@ namespace SaveUp.ViewModels
             {
                 this.Entries.Add(entrieViewModel);
             }
+
+            this.OnPropertyChanged(nameof(this.TotalAmount));
+            this.OnPropertyChanged(nameof(this.Entries));
         }
 
         public async Task OnEntireDelete()
         {
             if (!this.SelectedEntrie.Any())
             {
+                var toast = Toast.Make("Keine Einträge Ausgewählt");
+                await toast.Show();
                 return;
             }
+
+            this.MainButtonIsEnabled = false;
 
             var result = await this.entrieService.DeleteRange(this.SelectedEntrie);
 
@@ -47,11 +72,8 @@ namespace SaveUp.ViewModels
                 await toast.Show();
                 await this.OnEntireLoad();
             }
-            else
-            {
-                var toast = Toast.Make("Fehlgeschlagen");
-                await toast.Show();
-            }
+
+            this.MainButtonIsEnabled = true;
         }
 
         public bool CanDeleteEntrie()

@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using CommunityToolkit.Maui.Alerts;
 using SaveUp.Models.ViewModels;
 using SaveUp.Services.Http;
@@ -12,6 +11,23 @@ namespace SaveUp.ViewModels
         private EntrieViewModel entrie = new();
 
         public Command AddEntrieCommand { get; set; }
+
+        private bool mainButtonIsEnabled = true;
+
+        public bool MainButtonIsEnabled
+        {
+            get => this.mainButtonIsEnabled;
+            set
+            {
+                if (Equals(value, this.mainButtonIsEnabled))
+                {
+                    return;
+                }
+
+                this.SetField(ref this.mainButtonIsEnabled, value);
+            }
+        }
+
 
         public string Description
         {
@@ -45,18 +61,19 @@ namespace SaveUp.ViewModels
 
         public async Task OnAddEntrie()
         {
+            this.MainButtonIsEnabled = true;
             var result = await this.entrieService.Create(this.entrie);
 
             if (result)
             {
                 var toast = Toast.Make("Eintrag erstellt");
                 await toast.Show();
+                this.Description = string.Empty;
+                this.Amount = 0;
+                await Shell.Current.GoToAsync("//Entries");
             }
-            else
-            {
-                var toast = Toast.Make("Fehlgeschlagen");
-                await toast.Show();
-            }
+
+            this.MainButtonIsEnabled = true;
         }
 
         public bool CanAddEntrie()

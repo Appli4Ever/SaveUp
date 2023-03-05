@@ -5,11 +5,11 @@
              Title="Eintrag Erfassen"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
 
-    <VerticalStackLayout>
-        <Label Text="Beschreibung"></Label>
+    <VerticalStackLayout Margin="150,0,150,0">
+        <Label Text="Beschreibung" Margin="0,20,0,0"></Label>
         <Entry Text="{Binding Path=Description}"></Entry>
-        <Label Text="Geld gespart in CHF"></Label>
+        <Label Text="Geld gespart in CHF" Margin="0,20,0,0"></Label>
         <Entry Text="{Binding Path=Amount}"></Entry>
-        <Button Text="Erfassen" Command="{Binding Path=AddEntrieCommand}"></Button>
+        <Button Text="Erfassen" IsEnabled="{Binding Path=MainButtonIsEnabled}" Command="{Binding Path=AddEntrieCommand}" Margin="0,20,0,0"></Button>
     </VerticalStackLayout>
 </ContentPage>

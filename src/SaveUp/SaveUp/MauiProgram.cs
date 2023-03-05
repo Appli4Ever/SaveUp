@@ -1,4 +1,6 @@
+using System.Net;
 using CommunityToolkit.Maui;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SaveUp.Pages;
 using SaveUp.Services.Http;
@@ -20,10 +22,11 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        builder.Services.AddPages();
-        builder.Services.AddSingleton<HttpClient>();
+        builder.Services.AddSingleton<UserIdentity>();
+        builder.Services.AddSingleton(e => new HttpClient(new HttpInterceptorService()));
         builder.Services.AddHttpService();
         builder.Services.AddViewModels();
+        builder.Services.AddPages();
 
 #if DEBUG
         builder.Logging.AddDebug();
@@ -32,7 +35,6 @@ public static class MauiProgram
 
         var host = builder.Build();
         var httpClient = host.Services.GetRequiredService<HttpClient>();
-
 
 #if DEBUG
         httpClient.BaseAddress = new Uri("http://localhost:5021/");

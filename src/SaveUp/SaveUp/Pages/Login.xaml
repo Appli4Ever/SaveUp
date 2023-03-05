@@ -4,16 +4,18 @@
              x:Class="SaveUp.Pages.Login"
              Title="Anmelden"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
-    <VerticalStackLayout>
+    <VerticalStackLayout Margin="150,0,150,0">
 
-        <Label Text="Benutzername"></Label>
+        <Label Text="Benutzername" Margin="0,20,0,0"></Label>
         <Entry Text="{Binding Path=Username}"></Entry>
 
-        <Label Text="Passwort"></Label>
+        <Label Text="Passwort" Margin="0,20,0,0"></Label>
         <Entry Text="{Binding Path=Password}"
                IsPassword="True"></Entry>
 
-        <Button Text="Anmelden" Command="{Binding Path=LoginCommand}"></Button>
+        <Button Text="Anmelden" IsEnabled="{Binding Path=MainButtonIsEnabled}" Command="{Binding Path=LoginCommand}" Margin="0,20,0,0"></Button>
+
+        <Button Text="Registrieren" Clicked="Button_OnClicked" Margin="0,20,0,0"></Button>
 
     </VerticalStackLayout>
 </ContentPage>
