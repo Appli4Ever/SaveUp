@@ -12,36 +12,46 @@ namespace SaveUp.Services.Http
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var response = await base.SendAsync(request, cancellationToken);
-
-            if (!response.IsSuccessStatusCode)
+            try
             {
-                switch (response.StatusCode)
+
+
+
+                var response = await base.SendAsync(request, cancellationToken);
+
+                if (!response.IsSuccessStatusCode)
                 {
-                    case HttpStatusCode.NotFound:
-                        {
-                            var toast = Toast.Make("Nicht Gefunden :(");
-                            await toast.Show(cancellationToken);
-                            break;
-                        }
-                    case HttpStatusCode.Unauthorized:
-                        {
-                            var toast = Toast.Make("Sie sind nicht Angemeldet");
-                            await toast.Show(cancellationToken);
-                            await Shell.Current.GoToAsync("//Login");
-                            break;
-                        }
-                    default:
-                        {
-                            var toast = Toast.Make("Etwas ging Schief!");
-                            await toast.Show(cancellationToken);
-                            break;
-                        }
+                    switch (response.StatusCode)
+                    {
+                        case HttpStatusCode.NotFound:
+                            {
+                                var toast = Toast.Make("Nicht Gefunden :(");
+                                await toast.Show(cancellationToken);
+                                break;
+                            }
+                        case HttpStatusCode.Unauthorized:
+                            {
+                                var toast = Toast.Make("Sie sind nicht Angemeldet");
+                                await toast.Show(cancellationToken);
+                                await Shell.Current.GoToAsync("//Login");
+                                break;
+                            }
+                        default:
+                            {
+                                var toast = Toast.Make("Etwas ging Schief!");
+                                await toast.Show(cancellationToken);
+                                break;
+                            }
+                    }
                 }
+
+                return response;
             }
-
-            return response;
-
+            catch (Exception e)
+            {
+                var toast = Toast.Make("Etwas ging Schief!\nPrüfen Sie Ihre Internetverbindung.");
+                await toast.Show(cancellationToken);
+            }
         }
     }
 }
