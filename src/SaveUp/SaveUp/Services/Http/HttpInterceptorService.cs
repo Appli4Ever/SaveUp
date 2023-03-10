@@ -14,9 +14,6 @@ namespace SaveUp.Services.Http
         {
             try
             {
-
-
-
                 var response = await base.SendAsync(request, cancellationToken);
 
                 if (!response.IsSuccessStatusCode)
@@ -47,10 +44,11 @@ namespace SaveUp.Services.Http
 
                 return response;
             }
-            catch (Exception e)
+            catch
             {
                 var toast = Toast.Make("Etwas ging Schief!\nPrüfen Sie Ihre Internetverbindung.");
                 await toast.Show(cancellationToken);
+                throw;
             }
         }
     }
