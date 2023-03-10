@@ -1,4 +1,5 @@
 using System.Net;
+using System.Net.Http.Headers;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,8 +23,21 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        builder.Services.AddSingleton<UserIdentity>();
-        builder.Services.AddSingleton(e => new HttpClient(new HttpInterceptorService()));
+        Uri baseAddress;
+
+#if DEBUG
+        baseAddress = new Uri("http://localhost:5021/");
+#else
+        baseAddress = new Uri("http://muellersimon.internet-box.ch");
+#endif
+
+        builder.Services.AddTransient<UserIdentity>();
+        builder.Services.AddTransient(e => new HttpClient(new HttpInterceptorService())
+        {
+            BaseAddress = baseAddress,
+            DefaultRequestHeaders = { Authorization = new AuthenticationHeaderValue("Bearer", Preferences.Get("JWT", "")) }
+        });
+
         builder.Services.AddHttpService();
         builder.Services.AddViewModels();
         builder.Services.AddPages();
@@ -34,13 +48,6 @@ public static class MauiProgram
 
 
         var host = builder.Build();
-        var httpClient = host.Services.GetRequiredService<HttpClient>();
-
-#if DEBUG
-        httpClient.BaseAddress = new Uri("http://localhost:5021/");
-#else
-        httpClient.BaseAddress = new Uri("http://muellersimon.internet-box.ch");
-#endif
 
         return host;
     }

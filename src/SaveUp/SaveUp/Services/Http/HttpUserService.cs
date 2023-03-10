@@ -28,11 +28,8 @@ namespace SaveUp.Services.Http
 
                     if (content.LoginStatus == LoginStatus.Success)
                     {
-                        this.httpClient.DefaultRequestHeaders.Authorization =
-                            new AuthenticationHeaderValue("Bearer", content.Token);
-
-                        this.user.Username = model.Username;
-                        this.user.IsLoggedIn = true;
+                        Preferences.Set("JWT", content.Token);
+                        Preferences.Set("Username", model.Username);
 
                         return content.LoginStatus;
                     }

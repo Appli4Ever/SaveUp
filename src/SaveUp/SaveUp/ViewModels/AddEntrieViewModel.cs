@@ -53,10 +53,15 @@ namespace SaveUp.ViewModels
             }
         }
 
-        public AddEntrieViewModel(HttpEntrieService entrieService)
+        public AddEntrieViewModel(HttpEntrieService entrieService, UserIdentity user)
         {
             this.entrieService = entrieService;
             this.AddEntrieCommand = new Command(async () => await this.OnAddEntrie(), this.CanAddEntrie);
+
+            if (user.IsLoggedOut)
+            {
+                Shell.Current.GoToAsync("//Login");
+            }
         }
 
         public async Task OnAddEntrie()

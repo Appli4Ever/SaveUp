@@ -8,6 +8,7 @@ namespace SaveUp.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private readonly HttpUserService userService;
+        private readonly UserIdentity userIdentity;
         private UserViewModel user = new();
 
         public string Password
@@ -62,9 +63,10 @@ namespace SaveUp.ViewModels
 
         public Command LoginCommand { get; set; }
 
-        public LoginViewModel(HttpUserService userService)
+        public LoginViewModel(HttpUserService userService, UserIdentity userIdentity)
         {
             this.userService = userService;
+            this.userIdentity = userIdentity;
 
             this.LoginCommand = new Command(async () => await this.OnLogin(), this.CanExecuteLogin);
 
@@ -82,6 +84,7 @@ namespace SaveUp.ViewModels
                     var toast = Toast.Make("Login Erfolgreich");
                     await toast.Show();
                     this.Username = string.Empty;
+                    this.userIdentity.CheckForLogin();
                     await Shell.Current.GoToAsync("//MainPage");
                     break;
                 case LoginStatus.Faild:

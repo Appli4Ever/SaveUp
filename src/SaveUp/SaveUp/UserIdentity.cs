@@ -4,12 +4,31 @@ namespace SaveUp
 {
     public class UserIdentity : ViewModelBase
     {
+        public UserIdentity()
+        {
+            this.CheckForLogin();
+        }
+
+        public void CheckForLogin()
+        {
+            var jwt = Preferences.Get("JWT", null);
+            var usernmae = Preferences.Get("Username", null);
+
+            if (jwt is null || usernmae is null)
+            {
+                this.IsLoggedIn = false;
+            }
+
+            this.IsLoggedIn = true;
+            this.Username = usernmae;
+        }
+
         private string? username;
 
         public string? Username
         {
             get => this.username;
-            set
+            private set
             {
                 if (Equals(this.username, value))
                 {
@@ -25,7 +44,7 @@ namespace SaveUp
         public bool IsLoggedIn
         {
             get => this.isLoggedIn;
-            set
+            private set
             {
                 this.SetField(ref this.isLoggedIn, value);
                 this.OnPropertyChanged(nameof(this.IsLoggedOut));

@@ -52,10 +52,15 @@ namespace SaveUp.ViewModels
             }
         }
 
-        public ChangePasswortViewModel(HttpUserService userService)
+        public ChangePasswortViewModel(HttpUserService userService, UserIdentity user)
         {
             this.userService = userService;
             this.PasswordChangeCommand = new Command(async () => await this.OnPasswordChange(), this.CanChangePassword);
+
+            if (user.IsLoggedOut)
+            {
+                Shell.Current.GoToAsync("//Login");
+            }
         }
 
         public async Task OnPasswordChange()

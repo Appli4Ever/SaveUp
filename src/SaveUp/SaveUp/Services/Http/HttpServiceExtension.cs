@@ -4,8 +4,8 @@ namespace SaveUp.Services.Http
     {
         public static void AddHttpService(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<HttpUserService>();
-            serviceCollection.AddSingleton<HttpEntrieService>();
+            serviceCollection.AddTransient<HttpUserService>();
+            serviceCollection.AddTransient<HttpEntrieService>();
         }
     }
 }
