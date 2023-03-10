@@ -105,7 +105,7 @@ stages:
             inputs:
               sshEndpoint: 'SimonRaspiSSH'
               runOptions: 'commands'
-              commands: 'kill $(ps aux | grep ''$(prTargetFolder)/SaveUp.Web.API.dll'' | awk ''{print $2}'')'
+              commands: 'kill $(ps aux | grep ''SaveUp.Web.API.dll'' | awk ''{print $2}'')'
               readyTimeout: '20000'
                 
           - task: DotNetCoreCLI@2
@@ -133,5 +133,5 @@ stages:
             inputs:
               sshEndpoint: 'SimonRaspiSSH'
               runOptions: 'inline'
-              inline: 'cd $(prTargetFolder);unzip SaveUp.Web.API.zip;rm securitySonar.Web.zip;nohup dotnet SaveUp.Web.API.dll -p ''5000'' > /dev/null 2>&1 &'
+              inline: 'cd $(prTargetFolder);unzip SaveUp.Web.API.zip;rm securitySonar.Web.zip;nohup dotnet SaveUp.Web.API.dll > /dev/null 2>&1 &'
               readyTimeout: '20000'   
