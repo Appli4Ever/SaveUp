@@ -22,23 +22,24 @@ namespace SaveUp.Services.Http
             {
                 var result = await this.httpClient.PostAsJsonAsync("api/User/Login", model);
 
-                if (result.IsSuccessStatusCode)
+                if (!result.IsSuccessStatusCode)
                 {
-                    var content = await result.Content.ReadFromJsonAsync<TokenViewModel>();
-
-                    if (content.LoginStatus == LoginStatus.Success)
-                    {
-                        this.httpClient.DefaultRequestHeaders.Authorization =
-                            new AuthenticationHeaderValue("Bearer", content.Token);
-
-                        this.user.Username = model.Username;
-                        this.user.IsLoggedIn = true;
-
-                        return content.LoginStatus;
-                    }
+                    return LoginStatus.Faild;
                 }
 
-                return LoginStatus.Faild;
+                var content = await result.Content.ReadFromJsonAsync<TokenViewModel>();
+
+                if (content.LoginStatus == LoginStatus.Success)
+                {
+                    this.httpClient.DefaultRequestHeaders.Authorization =
+                        new AuthenticationHeaderValue("Bearer", content.Token);
+
+                    this.user.Username = model.Username;
+                    this.user.IsLoggedIn = true;
+                }
+
+                return content.LoginStatus;
+
             }
             catch
             {

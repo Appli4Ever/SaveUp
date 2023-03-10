@@ -56,16 +56,9 @@ namespace SaveUp.Web.API.Controllers
         {
             var result = await this.userService.CheckLogin(model);
 
-            switch (result.LoginStatus)
-            {
-                case LoginStatus.Success:
-                    return this.Ok(result);
-                case LoginStatus.Faild or LoginStatus.Blocked:
-                    return this.BadRequest(result);
-                default:
-                    return this.BadRequest();
-            }
+            return this.Ok(result);
         }
+
 
         /// <summary>
         /// Ändert das Passwort des angemeldeten Benutzer

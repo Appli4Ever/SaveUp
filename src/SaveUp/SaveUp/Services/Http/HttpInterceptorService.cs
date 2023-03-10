@@ -33,7 +33,7 @@ namespace SaveUp.Services.Http
                         }
                     default:
                         {
-                            var toast = Toast.Make("Etwas ging Schief");
+                            var toast = Toast.Make("Etwas ging Schief!");
                             await toast.Show(cancellationToken);
                             break;
                         }
