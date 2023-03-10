@@ -21,6 +21,8 @@
                 </controls:DataGridSelectionColumn>
                 <controls:DataGridColumn Binding="{Binding Description}" Title="Beschreibung"/>
                 <controls:DataGridColumn Binding="{Binding Amount}" Title="Geld gespart in CHF"/>
+                <controls:DataGridColumn Binding="{Binding Created, StringFormat='{0:D}'}" Title="Datum">
+                </controls:DataGridColumn>
             </controls:DataGrid.Columns>
 
             <controls:DataGrid.EmptyView>

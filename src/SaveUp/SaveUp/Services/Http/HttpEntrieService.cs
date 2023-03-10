@@ -16,6 +16,7 @@ namespace SaveUp.Services.Http
         {
             try
             {
+                model.Created = DateTime.Now;
                 var result = await this.httpClient.PostAsJsonAsync("api/Entrie/Create", model);
 
                 return result.IsSuccessStatusCode;

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,9 @@ public static class MauiProgram
 #else
         httpClient.BaseAddress = new Uri("http://muellersimon.internet-box.ch");
 #endif
+
+        CultureInfo.CurrentUICulture = new CultureInfo("de-CH");
+        CultureInfo.CurrentCulture = new CultureInfo("de-CH");
 
         return host;
     }

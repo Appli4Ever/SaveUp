@@ -49,7 +49,7 @@ public class EntrieService : IEntrieService
             };
 
         }
-        catch (System.Exception e)
+        catch
         {
             return null;
         }
