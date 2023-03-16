@@ -56,7 +56,7 @@ stages:
     - task: CopyFiles@2
       displayName: 'Copy Files DatabaseDeployment'
       inputs:
-        SourceFolder: '$(Build.SourcesDirectory)$(databaseDeployment)'
+        SourceFolder: '$(Build.SourcesDirectory)/$(databaseDeployment)'
         TargetFolder: '$(build.artifactstagingdirectory)/$(artifactNameDeployment)'
 
     - task: DotNetCoreCLI@2
