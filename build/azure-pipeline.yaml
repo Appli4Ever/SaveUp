@@ -43,7 +43,7 @@ stages:
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
-        projects: '$(solution)'
+        projects: '$(databaseProject)'
         arguments: '--configuration $(BuildConfiguration) /p:Version=$(Build.BuildNumber)'
         
     - task: DotNetCoreCLI@2
