@@ -1,0 +1,99 @@
+parameters:
+- name: WebAppName
+  type: string
+- name: ServiceName
+  type: string
+- name: BuildDirectory
+  type: string
+- name: DatabaseDLLName
+  type: string
+- name: DatabaseArtifactName
+  type: string
+- name: TargetFolder
+  type: string
+- name: WebAppZipName
+  type: string
+- name: WebAppArtifactName
+  type: string
+- name: ConnectionString
+  type: string
+- name: JWTKey
+  type: string
+
+steps:
+- task: SSH@0
+  displayName: 'Stop ${{ parameters.WebAppName }} Service'
+  inputs:
+    sshEndpoint: 'SimonRaspiSSH'
+    runOptions: 'commands'
+    commands: 'sudo systemctl stop ${{ parameters.ServiceName }}'
+    readyTimeout: '20000'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Update database'
+  inputs:
+    command: custom
+    custom: '${{ parameters.DatabaseDLLName }}'
+    workingDirectory: '${{ parameters.BuildDirectory }}/${{ parameters.DatabaseArtifactName }}'
+    arguments:  '-c "${{ parameters.ConnectionString }}"'
+
+- task: CopyFilesOverSSH@0
+  displayName: 'Copy ${{ parameters.WebAppZipName }} over SSH'
+  inputs:
+    sshEndpoint: 'SimonRaspiSSH'
+    sourceFolder: '${{ parameters.BuildDirectory }}/${{ parameters.WebAppArtifactName }}'
+    contents: '**'
+    targetFolder: '${{ parameters.TargetFolder }}'
+    cleanTargetFolder: true
+    readyTimeout: '20000'
+    failOnEmptySource: true
+
+- task: SSH@0
+  displayName: 'Unzip ${{ parameters.WebAppZipName }}'
+  inputs:
+    runOptions: 'inline'
+    sshEndpoint: 'SimonRaspiSSH'
+    inline: 'cd ${{ parameters.TargetFolder }};unzip -o ${{ parameters.WebAppZipName }};rm ${{ parameters.WebAppZipName }};rm appsettings.json;rm appsettings.Development.json'
+    readyTimeout: '20000'
+
+- task: PowerShell@2
+  displayName: 'Create appsettings.json'
+  inputs:
+    targetType: 'inline'
+    script: |
+         Set-Content appsettings.json "{
+             `"ConnectionStrings`": {
+               `"DefaultConnection`": `"${{ parameters.ConnectionString }}`"
+             },
+             "Jwt": {
+        "Key": "${{ parameters.JWTKey }}",
+        "Issuer": "JWTAuthenticationServer",
+        "Audience": "JWTServicePostmanClient"
+            },
+             `"Logging`": {
+                `"LogLevel`": {
+                    `"Default`": `"Information`",
+                    `"Microsoft.AspNetCore`": `"Warning`"
+                }
+            }
+         }"
+    workingDirectory: '${{ parameters.BuildDirectory }}/${{ parameters.WebAppArtifactName }}'
+
+- task: CopyFilesOverSSH@0
+  displayName: 'Copy appsettings over SSH'
+  inputs:
+    sshEndpoint: 'SimonRaspiSSH'
+    sourceFolder: '${{ parameters.BuildDirectory }}/${{ parameters.WebAppArtifactName }}'
+    contents: 'appsettings.json'
+    targetFolder: '${{ parameters.TargetFolder }}'
+    cleanTargetFolder: false
+    readyTimeout: '20000'
+    failOnEmptySource: false
+
+- task: SSH@0
+  displayName: 'Start ${{ parameters.WebAppName }} Service'
+  inputs:
+    runOptions: 'inline'
+    sshEndpoint: 'SimonRaspiSSH'
+    inline: 'sudo systemctl start ${{ parameters.ServiceName }}'
+    readyTimeout: '20000'
