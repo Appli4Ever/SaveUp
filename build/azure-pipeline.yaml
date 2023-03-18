@@ -102,7 +102,7 @@ stages:
           
           - template: templates/on-premis-deployment-template.yaml
             parameters:
-              WebAppName: 'WebAPI-PROD'
+              WebAppName: 'SaveUpWebAPIProd'
               ServiceName: $(ServiceName)
               BuildDirectory: $(Agent.BuildDirectory)
               DatabaseDLLName: 'SaveUp.MigrateDatabase.CLI'
