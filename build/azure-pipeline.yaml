@@ -17,7 +17,7 @@ variables:
   artifactNameDeployment: 'saveUp-database-deployment'
   databaseDeployment: 'src/SaveUp/SaveUp.MigrateDatabase.CLI/bin/Release/net7.0'
   buildOutput: 'bin\Release\net7.0'
-  prTargetFolder: '/var/www/pr.saveup'
+  webAppZipName: 'SaveUp.Web.API.zip'
 
 stages:
 - stage: saveUp_build
