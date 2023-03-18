@@ -99,39 +99,16 @@ stages:
           - download: current
             artifact: 'saveUp-database-deployment'
             displayName: 'Download database deployment packages'
-
-          - task: SSH@0
-            displayName: 'Kill Prod Prozess'
-            inputs:
-              sshEndpoint: 'SimonRaspiSSH'
-              runOptions: 'commands'
-              commands: 'kill $(ps aux | grep ''SaveUp.Web.API.dll'' | awk ''{print $2}'')'
-              readyTimeout: '20000'
-                
-          - task: DotNetCoreCLI@2
-            displayName: 'Update Prod database'
-            inputs:
-              command: custom
-              custom: SaveUp.MigrateDatabse.CLI.dll
-              arguments: '-c "$(ConnectionString)"'
-              workingDirectory: '$(Agent.BuildDirectory)/saveUp-database-deployment'              
-
-        
-          - task: CopyFilesOverSSH@0
-            displayName: 'Copy Prod Zip over SSH'
-            inputs:
-              sshEndpoint: 'SimonRaspiSSH'
-              sourceFolder: '$(Agent.BuildDirectory)/$(artifactName)'
-              contents: '**'
-              targetFolder: '$(prTargetFolder)'
-              cleanTargetFolder: true
-              readyTimeout: '20000'
-              failOnEmptySource: true
-              
-          - task: SSH@0
-            displayName: 'Unzip and Start Test Project'
-            inputs:
-              sshEndpoint: 'SimonRaspiSSH'
-              runOptions: 'inline'
-              inline: 'cd $(prTargetFolder);unzip SaveUp.Web.API.zip;rm securitySonar.Web.zip;nohup dotnet SaveUp.Web.API.dll > /dev/null 2>&1 &'
-              readyTimeout: '20000'   
+          
+          - template: templates/on-premis-deployment-template.yaml
+            parameters:
+              WebAppName: 'WebAPI-PROD'
+              ServiceName: $(ServiceName)
+              BuildDirectory: $(Agent.BuildDirectory)
+              DatabaseDLLName: 'SaveUp.MigrateDatabase.CLI'
+              DatabaseArtifactName: $(artifactNameDeployment)
+              TargetFolder: $(TargetFolder)
+              WebAppZipName: $(webAppZipName)
+              WebAppArtifactName: $(artifactName)
+              ConnectionString: $(ConnectionString)
+              JWTKey: $(JWTKey)
