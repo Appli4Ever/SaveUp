@@ -105,7 +105,7 @@ stages:
               WebAppName: 'SaveUpWebAPIProd'
               ServiceName: $(ServiceName)
               BuildDirectory: $(Agent.BuildDirectory)
-              DatabaseDLLName: 'SaveUp.MigrateDatabase.CLI'
+              DatabaseDLLName: 'SaveUp.MigrateDatabase.CLI.dll'
               DatabaseArtifactName: $(artifactNameDeployment)
               TargetFolder: $(TargetFolder)
               WebAppZipName: $(webAppZipName)
