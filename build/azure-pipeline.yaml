@@ -45,14 +45,7 @@ stages:
       inputs:
         projects: '$(databaseProject)'
         arguments: '--configuration $(BuildConfiguration) /p:Version=$(Build.BuildNumber)'
-        
-    - task: DotNetCoreCLI@2
-      displayName: 'Build .NET Maui'
-      inputs:
-        command: 'build'
-        projects: '$(mauiProject)'
-        arguments: '-c $(BuildConfiguration) -f net7.0-windows'   
-
+      
     - task: DotNetCoreCLI@2
       displayName: Test
       inputs:
