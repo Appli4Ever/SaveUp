@@ -63,13 +63,8 @@ steps:
     script: |
          Set-Content appsettings.json "{
              `"ConnectionStrings`": {
-               `"DefaultConnection`": "${{ parameters.ConnectionString }}"
+               `"DefaultConnection`": `"${{ parameters.ConnectionString }}`"
              },
-             `"Jwt`": {
-              `"Key`": "${{ parameters.JWTKey }}",
-              `"Issuer`": "JWTAuthenticationServer",
-           `"Audience`": "JWTServicePostmanClient"
-            },
              `"Logging`": {
                 `"LogLevel`": {
                     `"Default`": `"Information`",
