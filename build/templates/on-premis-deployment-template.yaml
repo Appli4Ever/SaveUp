@@ -63,7 +63,7 @@ steps:
     script: |
          Set-Content appsettings.json "{
              `"ConnectionStrings`": {
-               `"DefaultConnection`": `"${{ parameters.ConnectionString }}`"
+               `"DefaultConnection`": "${{ parameters.ConnectionString }}"
              },
              `"Jwt`": {
               `"Key`": "${{ parameters.JWTKey }}",
