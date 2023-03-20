@@ -65,6 +65,11 @@ steps:
              `"ConnectionStrings`": {
                `"DefaultConnection`": `"${{ parameters.ConnectionString }}`"
              },
+             `"Jwt`": {
+             `"Key`": `"${{ parameters.JWTKey }}`",
+             `"Issuer`": `"JWTAuthenticationServer`",
+             `"Audience`": `"JWTServicePostmanClient`"
+             },
              `"Logging`": {
                 `"LogLevel`": {
                     `"Default`": `"Information`",
