@@ -42,7 +42,7 @@ steps:
   inputs:
     sshEndpoint: 'SimonRaspiSSH'
     sourceFolder: '${{ parameters.BuildDirectory }}/${{ parameters.WebAppArtifactName }}'
-    contents: '**'
+    contents: '**/*.zip'
     targetFolder: '${{ parameters.TargetFolder }}'
     cleanTargetFolder: true
     readyTimeout: '20000'
