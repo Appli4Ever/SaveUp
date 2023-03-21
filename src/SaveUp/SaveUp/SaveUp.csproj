@@ -42,7 +42,7 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>Automatisch</CodesignProvision>
+	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
 	  <CodesignKey>Apple Development: Created via API (SLKWGJ5M9N)</CodesignKey>
 	  <MtouchDebug>true</MtouchDebug>
 	</PropertyGroup>
