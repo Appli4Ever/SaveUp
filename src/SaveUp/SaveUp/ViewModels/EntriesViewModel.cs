@@ -42,8 +42,8 @@ namespace SaveUp.ViewModels
 
         public async Task OnEntireLoad()
         {
-            var result = await this.entrieService.All();
             this.Entries.Clear();
+            var result = await this.entrieService.All();
             foreach (var entrieViewModel in result)
             {
                 this.Entries.Add(entrieViewModel);
