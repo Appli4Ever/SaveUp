@@ -42,18 +42,19 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
-	  <CodesignKey>Apple Development: Rene Leupold (HHH3645RYR)</CodesignKey>
+	  <CodesignProvision>Automatisch</CodesignProvision>
+	  <CodesignKey>Apple Development: Created via API (SLKWGJ5M9N)</CodesignKey>
 	  <MtouchDebug>true</MtouchDebug>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
-	  <CodesignProvision>iOS Team Provisioning Profile: *</CodesignProvision>
-	  <CodesignKey>Apple Development: Rene Leupold (HHH3645RYR)</CodesignKey>
+	  <CodesignProvision>VS: WildCard Development</CodesignProvision>
+	  <CodesignKey>Apple Development: Created via API (SLKWGJ5M9N)</CodesignKey>
 	</PropertyGroup>
 	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 	  <WarningLevel>4</WarningLevel>
 	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" />
