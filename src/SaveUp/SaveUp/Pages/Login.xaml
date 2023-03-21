@@ -4,7 +4,7 @@
              x:Class="SaveUp.Pages.Login"
              Title="Anmelden"
              xmlns:vm="clr-namespace:SaveUp.ViewModels">
-    <VerticalStackLayout Margin="150,0,150,0">
+    <VerticalStackLayout MaximumWidthRequest="400" Margin="0,0,0,0">
 
         <Label Text="Benutzername" Margin="0,20,0,0"></Label>
         <Entry Text="{Binding Path=Username}"></Entry>

@@ -5,7 +5,7 @@
              Title="Einträge"
              xmlns:vm="clr-namespace:SaveUp.ViewModels"
              xmlns:controls="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material">
-    <VerticalStackLayout Margin="150,0,150,0">
+    <VerticalStackLayout MaximumWidthRequest="400" Margin="0,0,0,0">
         <controls:DataGrid ItemsSource="{Binding Entries}"
                            UseAutoColumns="False"
                            HorizontalOptions="Center"
@@ -14,7 +14,8 @@
                            BackgroundColor="AliceBlue"
                            LineSeperatorColor="Black"
                            MaximumHeightRequest="500"
-                           Margin="0,20,0,0">
+                           Margin="0,20,0,0"
+                           x:Name="DataGrid">
 
             <controls:DataGrid.Columns>
                 <controls:DataGridSelectionColumn>
