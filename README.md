@@ -1,12 +1,10 @@
-# ::projektname
-(Projektbeschreibung)
+# SaveUp
+Projekt im Rahmen des Modul 335.
+Mit dem Projekt können Einträge erstellt und Abgerufen werden.
+Diese Einträge sind nicht gekaufte Artikel und ihren Preis. Somit kann eine Übersicht über das Gesparte Geld gewonnen werden.
 
 ## Einsatz neuer Technologien
-Beim Einsatz **neuer Technologien**, **Frameworks** und **Libraries** gilt folgender Ablauf:
-1. Erstellen eines kleinen Prototypen
-2. Projektteam den Prototypen vorstellen
-3. Ziele, die mit der neuen Technologie bzw. Framework erreicht werden, unter den Aspekten der Wirtschaftlichkeit, Machbarkeit und Wünschbarkeit bewerten
-4. Vergleich zu bereits eingesetzten Technologien und den Vorteil daraus
+- .NET MAUI
 
 # Dokumentation
 Doc as Code im Verzeichnis /docs des Repositories.
@@ -18,16 +16,7 @@ Infos zu Konventionen und Vorgehen mit Azure DevOps Wiki https://docs.microsoft.
 2. Verzeichnisse müssen auch ein Markdown-File mit gleichen Namen enthalten (siehe Architektur)
 
 # Technologien und Frameworks
-1. Visual Studio 2019
-2. .NET 5
-3. Blazor
-4. Entity Framework
-5. Browserstack
-6. Telerik Reporting
-7. Dokumente mit DocumentProcessing
+Siehe Dokumentation im /docs Verzeichnis.
 
-# Build and Test
-TODO: 
-
-# Contribute
-TODO: 
+# Azure Repo
+Das Azure Repository findet sich [hier](https://dev.azure.com/databinding/_git/SaveUp).
