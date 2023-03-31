@@ -6,5 +6,5 @@ public class TokenViewModel
 {
     public string? Token { get; set; }
 
-    public LoginStatus LoginStatus{ get; set; }
+    public LoginStatus LoginStatus { get; set; }
 }

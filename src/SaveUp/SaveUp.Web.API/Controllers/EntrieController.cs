@@ -58,7 +58,7 @@ namespace SaveUp.Web.API.Controllers
         /// <param name="idList">Liste der Id</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ActionResult<List<EntrieViewModel>>> Delete([FromBody]List<int> idList)
+        public async Task<ActionResult<List<EntrieViewModel>>> Delete([FromBody] List<int> idList)
         {
             var result = await this.entrieService.DeleteRange(idList);
 

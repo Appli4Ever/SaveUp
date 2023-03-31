@@ -1,7 +1,5 @@
 using System.Globalization;
-using System.Net;
 using CommunityToolkit.Maui;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SaveUp.Pages;
 using SaveUp.Services.Http;

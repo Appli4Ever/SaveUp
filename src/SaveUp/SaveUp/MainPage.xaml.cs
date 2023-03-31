@@ -1,5 +1,3 @@
-using SaveUp.ViewModels;
-
 namespace SaveUp;
 
 public partial class MainPage : ContentPage

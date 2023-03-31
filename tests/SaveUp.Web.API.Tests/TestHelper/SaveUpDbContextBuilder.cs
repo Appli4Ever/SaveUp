@@ -1,8 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SaveUp.Web.API.Entities;
 
@@ -12,8 +7,8 @@ namespace SaveUp.Web.API.Tests.TestHelper
     {
         public TestIdentity TestIdentity = new TestIdentity();
 
-        private List<Entrie> entries = new List<Entrie>();
-        private List<User> users = new List<User>();
+        private readonly List<Entrie> entries = new List<Entrie>();
+        private readonly List<User> users = new List<User>();
 
         public SaveUpDbContextBuilder() { }
 

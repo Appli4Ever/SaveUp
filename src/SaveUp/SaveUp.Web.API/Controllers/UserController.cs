@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SaveUp.Models.Enum;
 using SaveUp.Models.ViewModels;
 using SaveUp.Web.API.Services;
 

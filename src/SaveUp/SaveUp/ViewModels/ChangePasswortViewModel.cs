@@ -7,7 +7,7 @@ namespace SaveUp.ViewModels
     public class ChangePasswortViewModel : ViewModelBase
     {
         private readonly HttpUserService userService;
-        private PasswordViewModel newPasword = new();
+        private readonly PasswordViewModel newPasword = new();
 
         public Command PasswordChangeCommand { get; set; }
 

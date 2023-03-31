@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CommunityToolkit.Maui.Alerts;
 using SaveUp.Models.ViewModels;
 using SaveUp.Services.Http;
@@ -13,7 +8,7 @@ namespace SaveUp.ViewModels
     {
         private readonly HttpUserService userService;
         public Command RegisterCommand { get; set; }
-        private UserViewModel user = new();
+        private readonly UserViewModel user = new();
 
         public string Password
         {

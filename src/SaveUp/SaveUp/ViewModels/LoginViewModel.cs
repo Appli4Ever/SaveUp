@@ -8,7 +8,7 @@ namespace SaveUp.ViewModels
     public class LoginViewModel : ViewModelBase
     {
         private readonly HttpUserService userService;
-        private UserViewModel user = new();
+        private readonly UserViewModel user = new();
 
         public string Password
         {

@@ -8,7 +8,7 @@ namespace SaveUp.ViewModels
     {
 
         private readonly HttpEntrieService entrieService;
-        private EntrieViewModel entrie = new();
+        private readonly EntrieViewModel entrie = new();
 
         public Command AddEntrieCommand { get; set; }
 
